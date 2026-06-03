@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Face Filter</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+    <header>
+      <h1>Face Filter</h1>
+    </header>
+
+    <main>
+      <div id="viewport">
+        <video id="video" autoplay muted playsinline></video>
+        <canvas id="overlay"></canvas>
+        <div id="rec-indicator" class="hidden">
+          <span class="rec-dot"></span>
+          <span id="rec-timer">0:00</span>
+        </div>
+        <div id="loading">
+          <div class="spinner"></div>
+          <p>Starting camera...</p>
+        </div>
+      </div>
+
+      <div id="controls-panel">
+        <div class="control-group">
+          <span class="group-label">Filters</span>
+          <div class="btn-row">
+            <button class="filter-btn" data-filter="glasses">
+              <span class="icon">👓</span>
+              <span class="label">Glasses</span>
+            </button>
+            <button class="filter-btn" data-filter="hat">
+              <span class="icon">🎩</span>
+              <span class="label">Hat</span>
+            </button>
+            <button class="filter-btn" data-filter="sticker">
+              <span class="icon">⭐</span>
+              <span class="label">Sticker</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <span class="group-label">Effects</span>
+          <div class="btn-row">
+            <button class="filter-btn" data-filter="glow">
+              <span class="icon">✨</span>
+              <span class="label">Glow</span>
+            </button>
+            <button class="filter-btn" data-filter="colorShift">
+              <span class="icon">🌈</span>
+              <span class="label">Color</span>
+            </button>
+            <button class="filter-btn" data-filter="none">
+              <span class="icon">✕</span>
+              <span class="label">Clear</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <span class="group-label">Rec</span>
+          <div class="btn-row">
+            <button id="record-btn" class="filter-btn record-btn">
+              <span class="icon">⏺</span>
+              <span class="label">Record</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Preview section — shown after recording stops -->
+      <div id="preview-section" class="hidden">
+        <div id="preview-header">
+          <span>Preview</span>
+          <button id="close-preview">✕</button>
+        </div>
+        <video id="preview-video" controls playsinline></video>
+        <div id="preview-actions">
+          <a id="download-btn" download="face-filter-recording.webm">
+            <span>⬇</span> Download
+          </a>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- MediaPipe CDN — must load before ES module -->
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh@0.4.1633559619/face_mesh.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils@0.3.1632432234/camera_utils.js" crossorigin="anonymous"></script>
+
+  <script type="module" src="src/app.js"></script>
+</body>
+</html>
