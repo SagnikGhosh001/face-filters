@@ -39,38 +39,38 @@ export function drawHat({ landmarks, ctx, videoWidth, videoHeight }) {
   const bandH  = faceWidth * 0.06 * depthScale;
 
   ctx.save();
-  ctx.translate(forehead.x, forehead.y + pitchShift);
+  ctx.translate(forehead.x, forehead.y + pitchShift - faceWidth * 0.25);
   ctx.rotate(angle);
 
-  // Brim
+  // Brim — bottom edge sits at the anchor point (y=0), hat is entirely above
   ctx.fillStyle = '#1c1c1c';
   ctx.beginPath();
-  ctx.rect(-hatW / 2, -brimH / 2, hatW, brimH);
+  ctx.rect(-hatW / 2, -brimH, hatW, brimH);
   ctx.fill();
 
-  // Crown
+  // Crown — rises above brim
   ctx.fillStyle = '#141414';
   ctx.beginPath();
-  ctx.rect(-crownW / 2, -brimH / 2 - crownH, crownW, crownH);
+  ctx.rect(-crownW / 2, -brimH - crownH, crownW, crownH);
   ctx.fill();
 
   // Hatband accent
   ctx.fillStyle = '#8b0000';
   ctx.beginPath();
-  ctx.rect(-crownW / 2, -brimH / 2 - bandH, crownW, bandH);
+  ctx.rect(-crownW / 2, -brimH - bandH, crownW, bandH);
   ctx.fill();
 
   // Subtle highlight
   ctx.fillStyle = 'rgba(255,255,255,0.04)';
   ctx.beginPath();
-  ctx.rect(-crownW / 2, -brimH / 2 - crownH, crownW * 0.25, crownH);
+  ctx.rect(-crownW / 2, -brimH - crownH, crownW * 0.25, crownH);
   ctx.fill();
 
   // Definition outline
   ctx.strokeStyle = 'rgba(255,255,255,0.08)';
   ctx.lineWidth = 1;
-  ctx.strokeRect(-crownW / 2, -brimH / 2 - crownH, crownW, crownH);
-  ctx.strokeRect(-hatW / 2, -brimH / 2, hatW, brimH);
+  ctx.strokeRect(-crownW / 2, -brimH - crownH, crownW, crownH);
+  ctx.strokeRect(-hatW / 2, -brimH, hatW, brimH);
 
   ctx.restore();
 }

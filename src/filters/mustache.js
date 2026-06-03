@@ -7,11 +7,9 @@ function dist(a, b) {
 }
 
 export function drawMustache({ landmarks, ctx, videoWidth, videoHeight }) {
-  // Upper lip center & mouth corners for sizing/placement
-  const lipCenter  = toPixel(landmarks[164], videoWidth, videoHeight); // below nose, above upper lip
+  const upperLip   = toPixel(landmarks[0],   videoWidth, videoHeight); // top edge of upper lip
   const leftCorner = toPixel(landmarks[61],  videoWidth, videoHeight);
   const rightCorner= toPixel(landmarks[291], videoWidth, videoHeight);
-  const noseTip    = toPixel(landmarks[1],   videoWidth, videoHeight);
 
   const mouthWidth = dist(leftCorner, rightCorner);
   const angle      = Math.atan2(rightCorner.y - leftCorner.y, rightCorner.x - leftCorner.x);
@@ -20,9 +18,9 @@ export function drawMustache({ landmarks, ctx, videoWidth, videoHeight }) {
   const mW  = mouthWidth * 1.1;   // total mustache width
   const mH  = mouthWidth * 0.28;  // max mustache height
 
-  // Position: midpoint between nose tip and upper lip
-  const cx = (noseTip.x + lipCenter.x) / 2;
-  const cy = (noseTip.y + lipCenter.y) / 2;
+  // Anchor at the top edge of the upper lip — mustache sits just above it
+  const cx = upperLip.x;
+  const cy = upperLip.y - mH * 0.15;
 
   ctx.save();
   ctx.translate(cx, cy);
