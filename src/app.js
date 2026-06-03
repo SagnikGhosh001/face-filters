@@ -9,6 +9,7 @@ async function main() {
   const canvas         = document.getElementById('overlay');
   const loading        = document.getElementById('loading');
   const recordBtn      = document.getElementById('record-btn');
+  const snapBtn        = document.getElementById('snap-btn');
   const recIndicator   = document.getElementById('rec-indicator');
   const recTimer       = document.getElementById('rec-timer');
   const previewSection = document.getElementById('preview-section');
@@ -93,6 +94,36 @@ async function main() {
         previewSection.classList.remove('hidden');
         previewSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       }
+    });
+
+    snapBtn.addEventListener('click', () => {
+      const snap = document.createElement('canvas');
+      snap.width  = videoWidth;
+      snap.height = videoHeight;
+      const sctx = snap.getContext('2d');
+
+      // Draw mirrored video frame
+      sctx.save();
+      sctx.translate(snap.width, 0);
+      sctx.scale(-1, 1);
+      sctx.drawImage(video, 0, 0, snap.width, snap.height);
+      sctx.restore();
+
+      // Draw filter overlay (mirrored to match video)
+      sctx.save();
+      sctx.translate(snap.width, 0);
+      sctx.scale(-1, 1);
+      sctx.drawImage(canvas, 0, 0, snap.width, snap.height);
+      sctx.restore();
+
+      const link = document.createElement('a');
+      link.download = `face-filter-${Date.now()}.png`;
+      link.href = snap.toDataURL('image/png');
+      link.click();
+
+      // Flash feedback
+      snapBtn.classList.add('active');
+      setTimeout(() => snapBtn.classList.remove('active'), 300);
     });
 
     closePreview.addEventListener('click', () => {

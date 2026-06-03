@@ -1,13 +1,19 @@
-import { drawGlasses } from '../filters/glasses.js';
-import { drawHat } from '../filters/hat.js';
-import { drawSticker } from '../filters/sticker.js';
-import { drawGlow } from '../effects/glow.js';
+import { drawGlasses }    from '../filters/glasses.js';
+import { drawHat }        from '../filters/hat.js';
+import { drawSticker }    from '../filters/sticker.js';
+import { drawSunglasses } from '../filters/sunglasses.js';
+import { drawBunnyEars }  from '../filters/bunnyEars.js';
+import { drawMustache }   from '../filters/mustache.js';
+import { drawGlow }       from '../effects/glow.js';
 import { drawColorShift } from '../effects/colorShift.js';
 
 const DRAWABLES = {
   glasses:     { fn: drawGlasses,    alpha: 0.30 },
   hat:         { fn: drawHat,        alpha: 0.35 },
   sticker:     { fn: drawSticker,    alpha: 0.45 },
+  sunglasses:  { fn: drawSunglasses, alpha: 0.30 },
+  bunnyEars:   { fn: drawBunnyEars,  alpha: 0.35 },
+  mustache:    { fn: drawMustache,   alpha: 0.40 },
   glow:        { fn: drawGlow,       alpha: 0.35 },
   colorShift:  { fn: drawColorShift, alpha: 0.35 },
 };

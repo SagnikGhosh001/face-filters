@@ -316,6 +316,18 @@ main {
   transform: scale(0.97);
 }
 
+/* Snap button */
+.snap-btn {
+  border-color: #1a2a1a;
+  color: #6bcb77;
+}
+
+.snap-btn:hover {
+  border-color: #6bcb77;
+  background: #101a10;
+  color: #6bcb77;
+}
+
 /* Mobile responsiveness */
 @media (max-width: 520px) {
   #app {
